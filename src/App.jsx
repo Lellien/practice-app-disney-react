@@ -7,6 +7,7 @@ import Result from "./Result";
 
 function App() {
   const [characterInfo, setCharacterInfo] = useState({ loaded: false });
+  console.log(characterInfo);
 
   function isMainCharacter(name, movie) {
     let splitName = name.split(" ");
