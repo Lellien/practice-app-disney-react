@@ -19,7 +19,7 @@ export default function Result({ character }) {
               {character.leadRole ? (
                 <span>
                   the main protagonist in the movie{" "}
-                  <em>"{character.mainTitle}"</em>, accordingly named,
+                  <em>"{character.mainTitle}"</em>,
                 </span>
               ) : (
                 <span>

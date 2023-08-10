@@ -39,12 +39,11 @@ function App() {
       image: characterData.imageUrl,
       info: characterData.sourceUrl,
     };
-
     character.leadRole = isMainCharacter(character.name, character.mainTitle);
     setCharacterInfo(character);
   }
 
-  function respond(response) {
+  function handleResponse(response) {
     let result = response.data.data;
     if (!Array.isArray(result)) {
       //if only one result
@@ -60,7 +59,7 @@ function App() {
 
   function search(character) {
     let apiUrl = `https://api.disneyapi.dev/character?name=${character}`;
-    axios.get(apiUrl).then(respond);
+    axios.get(apiUrl).then(handleResponse);
   }
 
   return (

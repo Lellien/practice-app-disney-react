@@ -5,6 +5,11 @@ h2 {
   text-align: center;
   color: rgba(var(--secondary-color-rgb));
 }
+
+p {
+  margin-bottom: 0;
+}
+
 strong {
   font-size: larger;
 }
@@ -20,6 +25,7 @@ ul {
   font-size: smaller;
   list-style: none;
   padding: 0;
+  margin: 10px 0 18px;
 }
 
 @media (max-width: 768px) {

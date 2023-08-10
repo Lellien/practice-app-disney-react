@@ -6,15 +6,12 @@ export default function Form({ searchChar }) {
 
   function updateSearchWord(event) {
     event.preventDefault();
-    const word = event.target.value;
-    if (word.length) {
-      setSearchWord(word);
-    }
+    setSearchWord(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    searchChar(searchWord);
+    if (searchWord) searchChar(searchWord);
   }
 
   return (
