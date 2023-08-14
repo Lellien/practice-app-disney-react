@@ -7,7 +7,6 @@ import Result from "./Result";
 
 function App() {
   const [characterInfo, setCharacterInfo] = useState({ loaded: false });
-  console.log(characterInfo);
 
   function isMainCharacter(name, movie) {
     let splitName = name.split(" ");
@@ -43,17 +42,32 @@ function App() {
     setCharacterInfo(character);
   }
 
+  function findMostSignificant(results) {
+    //determines which result to use based on most films appeared in
+    let movies = [];
+    results.forEach((result) => {
+      movies.push(result.films.length);
+    });
+    Math.max(...movies);
+    return results.find(
+      (result) => result.films.length === Math.max(...movies)
+    );
+  }
+
   function handleResponse(response) {
-    let result = response.data.data;
-    if (!Array.isArray(result)) {
+    let results = response.data.data;
+    /* only want results with films and park attractions. check single result or filter if array*/
+    if (!Array.isArray(results)) {
       //if only one result
-      formatCharacter(result);
+      if (results.films.length && results.parkAttractions.length) {
+        formatCharacter(results);
+      } else return;
     } else {
-      result.forEach((item) => {
-        if (item.films.length && item.parkAttractions.length) {
-          formatCharacter(item);
-        }
-      });
+      results = results.filter(
+        (result) => result.films.length && result.parkAttractions.length
+      );
+
+      formatCharacter(findMostSignificant(results));
     }
   }
 
