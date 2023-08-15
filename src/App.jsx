@@ -55,25 +55,31 @@ function App() {
   }
 
   function handleResponse(response) {
-    let results = response.data.data;
+    let results = response;
     /* only want results with films and park attractions. check single result or filter if array*/
     if (!Array.isArray(results)) {
       //if only one result
       if (results.films.length && results.parkAttractions.length) {
         formatCharacter(results);
-      } else return;
+      }
+      return;
     } else {
       results = results.filter(
         (result) => result.films.length && result.parkAttractions.length
       );
-
       formatCharacter(findMostSignificant(results));
     }
   }
 
   function search(character) {
     let apiUrl = `https://api.disneyapi.dev/character?name=${character}`;
-    axios.get(apiUrl).then(handleResponse);
+    axios.get(apiUrl).then(checkResponse);
+    function checkResponse(response) {
+      if (response && response.data.data.length !== 0) {
+        /* Some responses .data.data are an empty array (eg. search for 'hello'). Returns true if .length > 0 (multiple results) or .length ===undefined (single result, no array) */
+        handleResponse(response.data.data);
+      }
+    }
   }
 
   return (
