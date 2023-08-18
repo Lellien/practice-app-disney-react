@@ -15,18 +15,8 @@ export default function Result({ character }) {
           </div>
           <div className="col-md-6">
             <p>
-              <strong>{character.name} </strong>is{" "}
-              {character.leadRole ? (
-                <span>
-                  the main protagonist in the movie{" "}
-                  <em>"{character.mainTitle}"</em>,
-                </span>
-              ) : (
-                <span>
-                  a character from the movie <em>{character.mainTitle}</em>
-                </span>
-              )}{" "}
-              and also appears in
+              <strong>{character.name} </strong>is a character from the movie{" "}
+              <em>{character.mainTitle}</em> and also appears in
             </p>
             <ul>
               {character.movies.map((movie, index) => {
@@ -54,7 +44,7 @@ export default function Result({ character }) {
                 {" "}
                 this page
               </a>
-              , which has tons more information{" "}
+              , which has much more information{" "}
             </p>
           </div>
           <div className="d-none d-md-block col-md-6">

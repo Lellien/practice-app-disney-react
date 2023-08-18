@@ -8,16 +8,12 @@ import Result from "./Result";
 function App() {
   const [characterInfo, setCharacterInfo] = useState({ loaded: false });
 
-  function isMainCharacter(name, movie) {
-    let splitName = name.split(" ");
-    return splitName.some((item) => movie.includes(item));
-  }
-
   function formatMainTitle(movieTitle) {
+    //some responses have titles with unwanted extra information in the string eg. 'Alice in Wonderland (1951 film)' which should just be 'Alice in Wonderland'
     let refinedMovieTitle = movieTitle
       .split(" ")
-      .filter((segment) => !segment.includes("(") && !segment.includes(")"));
-    let newTitle = "";
+      .filter((segment) => !segment.includes("(") && !segment.includes(")")); //filter out extra info in brackets
+    let newTitle = ""; //reconstruct string
     refinedMovieTitle.forEach((word, index) => {
       if (index < refinedMovieTitle.length - 1) {
         newTitle = newTitle + word + " ";
@@ -38,7 +34,6 @@ function App() {
       image: characterData.imageUrl,
       info: characterData.sourceUrl,
     };
-    character.leadRole = isMainCharacter(character.name, character.mainTitle);
     setCharacterInfo(character);
   }
 
@@ -58,16 +53,19 @@ function App() {
     let results = response;
     /* only want results with films and park attractions. check single result or filter if array*/
     if (!Array.isArray(results)) {
-      //if only one result
+      //if only one result, check directly
       if (results.films.length && results.parkAttractions.length) {
         formatCharacter(results);
       }
       return;
     } else {
+      //if multiple results (array) filter
       results = results.filter(
         (result) => result.films.length && result.parkAttractions.length
       );
-      formatCharacter(findMostSignificant(results));
+      if (results.length) {
+        formatCharacter(findMostSignificant(results));
+      }
     }
   }
 
