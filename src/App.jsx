@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Form from "./Form";
 import Result from "./Result";
+import Footer from "./Footer";
 
 function App() {
   const [characterInfo, setCharacterInfo] = useState({ loaded: false });
@@ -86,7 +87,13 @@ function App() {
         <h1 className="text-center fancy-font">Disney Characters</h1>
         <Form searchChar={search} />
       </header>
-      {characterInfo.loaded ? <Result character={characterInfo} /> : null}
+      {characterInfo.loaded ? (
+        <>
+          {" "}
+          <Result character={characterInfo} />
+          <Footer />
+        </>
+      ) : null}
     </>
   );
 }

@@ -1,0 +1,29 @@
+footer {
+  margin-top: 60px;
+  padding: 10px 0;
+  background: var(--pretty-bg);
+  text-align: center;
+}
+
+footer p {
+  font-family: monospace;
+  font-size: 0.9em;
+  color: rgba(var(--primary-color-rgb), 0.6);
+}
+footer p small {
+  font-family: var(--main-font);
+  color: rgba(var(--secondary-color-rgb), 0.3);
+}
+
+footer p a {
+  text-decoration: none;
+  color: rgba(var(--secondary-color-rgb), 0.9);
+  transition: all 250ms ease-in-out;
+}
+footer p a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: hsl(144.08deg 100% 70%);
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
