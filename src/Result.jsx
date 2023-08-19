@@ -1,11 +1,20 @@
+import { useRef } from "react";
 import "./Result.css";
 
 export default function Result({ character }) {
+  const charName = useRef(null);
+
+  function animateName() {
+    charName.current.classList.toggle("animate");
+  }
+
   return (
     <>
       <div className="container ">
         <div className="row">
-          <h2 className="fancy-font">{character.name}</h2>
+          <h2 className="fancy-font" ref={charName}>
+            {character.name}
+          </h2>
           <div className="d-block d-md-none col-md-6">
             <img
               className="rounded"
@@ -40,7 +49,11 @@ export default function Result({ character }) {
             <p>
               {" "}
               To read more about {character.name}, head over to{" "}
-              <a href={character.info} target="_blank">
+              <a
+                href={`${character.info}#mw-content-text`}
+                target="_blank"
+                title={`${character.name} wiki page on disney.fandom.com`}
+              >
                 {" "}
                 this page
               </a>
@@ -52,6 +65,14 @@ export default function Result({ character }) {
               className="rounded"
               src={character.image}
               alt={`Image of ${character.name}`}
+              onMouseEnter={(e) => {
+                e.preventDefault();
+                animateName();
+              }}
+              onMouseLeave={(e) => {
+                e.preventDefault();
+                animateName();
+              }}
             />
           </div>
         </div>
